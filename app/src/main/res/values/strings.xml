@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">DC Comics</string>
+    <string name="BASE_URL">https://dc-characters.herokuapp.com/api/</string>
+
+    <string name="home">Inicio</string>
+    <string name="character">Personaje</string>
+    <string name="group">Grupo</string>
+
+    <string name="seeMore">ver mas</string>
+    <string name="villian">Villanos</string>
+    <string name="hero">Héroe</string>
+    <string name="antihero">AntiHéroe</string>
+    <string name="realName">Nombre Real</string>
+    <string name="alias">Alias</string>
+    <string name="base">Base</string>
+    <string name="powers">Poderes y/o Habilidades</string>
+    <string name="occupation">Ocupación</string>
+    <string name="firstAppareance">Primera Aparición</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="leader">Líder</string>
+    <string name="members">Miembros</string>
+</resources>
