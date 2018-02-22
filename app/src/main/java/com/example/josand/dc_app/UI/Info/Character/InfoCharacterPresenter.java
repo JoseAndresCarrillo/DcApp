@@ -40,14 +40,13 @@ public class InfoCharacterPresenter {
 
 
     public PersonajeInfo setUpPersonaje() {
-        final PersonajeInfo[] personajeInfo = new PersonajeInfo[1];
         if (connection.getRetrofit() != null) {
             DcAPI service = connection.getRetrofit().create(DcAPI.class);
             Call<PersonajeInfo> call = service.getPersonaje(id);
             call.enqueue(new Callback<PersonajeInfo>() {
                 @Override
                 public void onResponse(Call<PersonajeInfo> call, Response<PersonajeInfo> response) {
-                    personajeInfo[0]= response.body();
+                    info = response.body();
                 }
 
                 @Override
@@ -56,7 +55,7 @@ public class InfoCharacterPresenter {
                 }
             });
         }
-        return personajeInfo[0];
+        return info;
     }
 
     public void onViewDettached() {
