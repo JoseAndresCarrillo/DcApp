@@ -1,5 +1,6 @@
 package com.example.josand.dc_app.Util;
 
+import com.example.josand.dc_app.Model.GrupoInfo;
 import com.example.josand.dc_app.Model.GrupoList;
 import com.example.josand.dc_app.Model.Personaje;
 import com.example.josand.dc_app.Model.PersonajeInfo;
@@ -32,5 +33,5 @@ public interface DcAPI {
 
     @Headers({"Content-Type: application/json"})
     @GET("grupos/{id}")
-    Call<PersonajeInfo> getGrupo(@Path("id")String id);
+    Call<GrupoInfo> getGrupo(@Path("id")String id);
 }

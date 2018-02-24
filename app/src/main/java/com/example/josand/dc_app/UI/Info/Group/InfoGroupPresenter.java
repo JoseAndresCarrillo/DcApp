@@ -2,16 +2,23 @@ package com.example.josand.dc_app.UI.Info.Group;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 
 import com.example.josand.dc_app.Model.Character;
 import com.example.josand.dc_app.Model.Group;
+import com.example.josand.dc_app.Model.GrupoInfo;
 import com.example.josand.dc_app.R;
 import com.example.josand.dc_app.UI.Info.Character.InfoCharacterActivity;
+import com.example.josand.dc_app.Util.DcAPI;
+import com.example.josand.dc_app.Util.RetrofitBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.gujun.android.taggroup.TagGroup;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by josan on 13/02/2018.
@@ -19,23 +26,36 @@ import me.gujun.android.taggroup.TagGroup;
 
 public class InfoGroupPresenter {
     private Context mContext;
+    private RetrofitBuilder connection;
     private IInfoGroupActivity iInfoGroupActivity;
-    private Group group;
-    private List<String> members;
+    private GrupoInfo grupoInfo;
+    private String id;
 
-    public InfoGroupPresenter(Context mContext) {
+
+    public InfoGroupPresenter(Context mContext, String id) {
         this.mContext = mContext;
+        this.id = id;
+        connection = new RetrofitBuilder(mContext,mContext.getString(R.string.BASE_URL));
+        grupoInfo = new GrupoInfo();
     }
 
-    public Group getData(){
-        members = new ArrayList<>();
-        members.add("Superman");
-        members.add("Batman");
-        members.add("Wonder Woman");
-        group = new Group(members,"123","https://images3.alphacoders.com/802/802240.jpg",
-                "Justice League","WatchOver","Superman",
-                "The Brave and The Bold #28 (1960)");
-        return group;
+    public GrupoInfo getGroup(){
+        if (connection.getRetrofit()!= null){
+            DcAPI service = connection.getRetrofit().create(DcAPI.class);
+            Call<GrupoInfo> call = service.getGrupo(id);
+            call.enqueue(new Callback<GrupoInfo>() {
+                @Override
+                public void onResponse(Call<GrupoInfo> call, Response<GrupoInfo> response) {
+                    grupoInfo = response.body();
+                }
+
+                @Override
+                public void onFailure(Call<GrupoInfo> call, Throwable t) {
+
+                }
+            });
+        }
+        return grupoInfo;
     }
 
     public void onClickTag(TagGroup tagGroup){

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.josand.dc_app.Model.Group;
+import com.example.josand.dc_app.Model.GrupoInfo;
 import com.example.josand.dc_app.R;
 import com.squareup.picasso.Picasso;
 
@@ -21,17 +22,19 @@ public class InfoGroupActivity extends AppCompatActivity {
     private TextView base, firstAppearance;
     private TagGroup leader, members;
     private ImageView image;
-    private Group group;
+    private GrupoInfo group;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_group);
+        id = getIntent().getStringExtra("id");
         initViews();
         if(presenter == null){
-            presenter = new InfoGroupPresenter(getApplicationContext());
+            presenter = new InfoGroupPresenter(getApplicationContext(),id);
         }
-        group = getPresenter().getData();
+        group = getPresenter().getGroup();
         setUpData();
 
     }

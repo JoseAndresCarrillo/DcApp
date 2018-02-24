@@ -48,7 +48,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext,InfoGroupActivity.class);
-                    intent.putExtra("name",grupo.getName());
+                    intent.putExtra("id",grupo.getId());
                     mContext.startActivity(intent);
                 }
             });
