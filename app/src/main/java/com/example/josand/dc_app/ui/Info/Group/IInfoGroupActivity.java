@@ -11,10 +11,13 @@ import me.gujun.android.taggroup.TagGroup;
 public class IInfoGroupActivity {
     //implementar interface para setear datos
     public interface View{
+        void setUpData(GrupoInfo groupinfo);
 
     }
     public interface Presenter{
-        GrupoInfo getGroup();
+        void onViewDettached();
+        void onViewAttached(IInfoGroupActivity.View view);
+        void getGroup();
         void onClickTag(TagGroup tagGroup);
     }
 }

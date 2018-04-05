@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import me.gujun.android.taggroup.TagGroup;
 
-public class InfoGroupActivity extends AppCompatActivity {
+public class InfoGroupActivity extends AppCompatActivity implements IInfoGroupActivity.View{
 
     private IInfoGroupActivity.Presenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -33,8 +33,8 @@ public class InfoGroupActivity extends AppCompatActivity {
         if(presenter == null){
             presenter = new InfoGroupPresenter(this,id);
         }
-        group = getPresenter().getGroup();
-        setUpData();
+        getPresenter().onViewAttached(InfoGroupActivity.this);
+        getPresenter().getGroup();
 
     }
 
@@ -56,7 +56,8 @@ public class InfoGroupActivity extends AppCompatActivity {
         return presenter;
     }
 
-    public void setUpData(){
+    @Override
+    public void setUpData(GrupoInfo group){
         try{
             collapsingToolbarLayout.setTitle(group.getName());
             Picasso.with(getApplicationContext()).load(group.getProfile()).into(image);
@@ -69,4 +70,17 @@ public class InfoGroupActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPresenter().onViewAttached(InfoGroupActivity.this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPresenter().onViewDettached();
+    }
+
 }

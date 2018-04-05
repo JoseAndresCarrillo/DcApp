@@ -2,6 +2,7 @@ package com.example.josand.dc_app.ui.Info.Group;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 
 import com.example.josand.dc_app.model.GrupoInfo;
 import com.example.josand.dc_app.R;
@@ -21,7 +22,7 @@ import retrofit2.Response;
 public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
     private Context mContext;
     private RetrofitBuilder connection;
-    private IInfoGroupActivity iInfoGroupActivity;
+    private IInfoGroupActivity.View view;
     private GrupoInfo grupoInfo;
     private String id;
 
@@ -33,7 +34,25 @@ public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
         grupoInfo = new GrupoInfo();
     }
 
-    public GrupoInfo getGroup() {
+    @Override
+    public void onViewAttached(IInfoGroupActivity.View view) {
+        this.view = view;
+    }
+
+    @Override
+    public void onViewDettached() {
+        view = null;
+    }
+    private boolean isAttached() {
+        return getView() != null;
+    }
+
+    @Nullable
+    private IInfoGroupActivity.View getView() {
+        return view;
+    }
+
+    public void getGroup() {
         if (connection.getRetrofit() != null) {
             DcAPI service = connection.getRetrofit().create(DcAPI.class);
             Call<GrupoInfo> call = service.getGrupo(id);
@@ -41,6 +60,9 @@ public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
                 @Override
                 public void onResponse(Call<GrupoInfo> call, Response<GrupoInfo> response) {
                     grupoInfo = response.body();
+                    if(isAttached()){
+                        getView().setUpData(grupoInfo);
+                    }
                 }
 
                 @Override
@@ -49,7 +71,6 @@ public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
                 }
             });
         }
-        return grupoInfo;
     }
 
     public void onClickTag(TagGroup tagGroup) {
@@ -63,15 +84,5 @@ public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
 
     }
 
-
-
-    public void onViewDettached() {
-        iInfoGroupActivity = null;
-    }
-
-
-    public void onViewAttached(IInfoGroupActivity iInfoCharacterActivity) {
-        this.iInfoGroupActivity = iInfoCharacterActivity;
-    }
 
 }
