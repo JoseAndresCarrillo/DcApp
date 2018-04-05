@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,28 +21,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Main.MainActivity" />
+        <activity android:name=".ui.Main.MainActivity" />
         <activity
-            android:name=".UI.Details.DetailsActivity"
-            android:parentActivityName=".UI.Main.MainActivity">
+            android:name=".ui.Details.DetailsActivity"
+            android:parentActivityName=".ui.Main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UI.Main.MainActivity" />
+                android:value=".ui.Main.MainActivity" />
         </activity>
         <activity
-            android:name=".UI.Info.Character.InfoCharacterActivity"
-            android:parentActivityName=".UI.Main.MainActivity"
+            android:name=".ui.Info.Character.InfoCharacterActivity"
+            android:parentActivityName=".ui.Main.MainActivity"
             android:theme="@style/AppTheme.CustomToolbar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UI.Main.MainActivity" />
+                android:value=".ui.Main.MainActivity" />
         </activity>
-        <activity android:name=".UI.Info.Group.InfoGroupActivity"
-            android:parentActivityName=".UI.Main.MainActivity"
+        <activity android:name=".ui.Info.Group.InfoGroupActivity"
+            android:parentActivityName=".ui.Main.MainActivity"
             android:theme="@style/AppTheme.CustomToolbar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UI.Main.MainActivity" />
+                android:value=".ui.Main.MainActivity" />
         </activity>
     </application>
 

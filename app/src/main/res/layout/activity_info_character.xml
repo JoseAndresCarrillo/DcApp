@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.josand.dc_app.UI.Info.Character.InfoCharacterActivity">
+    tools:context="com.example.josand.dc_app.ui.Info.Character.InfoCharacterActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayoutCharacter"
