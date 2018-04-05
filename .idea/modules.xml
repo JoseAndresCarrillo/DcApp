@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\lvert\AndroidProjects\DcApp\DC_App.iml" filepath="C:\Users\lvert\AndroidProjects\DcApp\DC_App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DcApp.iml" filepath="$PROJECT_DIR$/DcApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DC_App.iml" filepath="$PROJECT_DIR$/DC_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\lvert\AndroidProjects\DcApp\app\app.iml" filepath="C:\Users\lvert\AndroidProjects\DcApp\app\app.iml" />
     </modules>
   </component>
 </project>

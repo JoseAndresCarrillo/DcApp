@@ -8,15 +8,14 @@ import me.gujun.android.taggroup.TagGroup;
  * Created by josan on 13/02/2018.
  */
 
-public class IInfoGroupActivity {
-    //implementar interface para setear datos
+public class InfoGroupContractor {
     public interface View{
         void setUpData(GrupoInfo groupinfo);
 
     }
     public interface Presenter{
         void onViewDettached();
-        void onViewAttached(IInfoGroupActivity.View view);
+        void onViewAttached(InfoGroupContractor.View view);
         void getGroup();
         void onClickTag(TagGroup tagGroup);
     }

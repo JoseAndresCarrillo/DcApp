@@ -19,10 +19,10 @@ import retrofit2.Response;
  * Created by josan on 13/02/2018.
  */
 
-public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
+public class InfoGroupPresenter implements InfoGroupContractor.Presenter {
     private Context mContext;
     private RetrofitBuilder connection;
-    private IInfoGroupActivity.View view;
+    private InfoGroupContractor.View view;
     private GrupoInfo grupoInfo;
     private String id;
 
@@ -35,7 +35,7 @@ public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
     }
 
     @Override
-    public void onViewAttached(IInfoGroupActivity.View view) {
+    public void onViewAttached(InfoGroupContractor.View view) {
         this.view = view;
     }
 
@@ -43,12 +43,13 @@ public class InfoGroupPresenter implements IInfoGroupActivity.Presenter {
     public void onViewDettached() {
         view = null;
     }
+
     private boolean isAttached() {
         return getView() != null;
     }
 
     @Nullable
-    private IInfoGroupActivity.View getView() {
+    private InfoGroupContractor.View getView() {
         return view;
     }
 

@@ -1,6 +1,7 @@
 package com.example.josand.dc_app.ui.Info.Character;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.josand.dc_app.model.Character;
@@ -19,13 +20,11 @@ import retrofit2.Response;
  * Created by josan on 11/02/2018.
  */
 
-public class InfoCharacterPresenter {
+public class InfoCharacterPresenter implements InfoCharacterContractor.presenter{
     private Context mContext;
     private RetrofitBuilder connection;
-    private IInfoCharacterActivity iInfoCharacterActivity;
-    private Character character;
+    private InfoCharacterContractor.view view;
     private PersonajeInfo info;
-    private ArrayList<PersonajeInfo> personajeInfos;
     private String id;
 
     public InfoCharacterPresenter(Context mContext, String id) {
@@ -33,11 +32,10 @@ public class InfoCharacterPresenter {
         this.id = id;
         connection = new RetrofitBuilder(mContext, this.mContext.getString(R.string.BASE_URL));
         info = new PersonajeInfo();
-        personajeInfos = new ArrayList<>();
     }
 
 
-    public PersonajeInfo setUpPersonaje() {
+    public void getPersonaje() {
         if (connection.getRetrofit() != null) {
             DcAPI service = connection.getRetrofit().create(DcAPI.class);
             Call<PersonajeInfo> call = service.getPersonaje(id);
@@ -45,6 +43,9 @@ public class InfoCharacterPresenter {
                 @Override
                 public void onResponse(Call<PersonajeInfo> call, Response<PersonajeInfo> response) {
                     info = response.body();
+                    if (isAttached()){
+                        getView().setUpData(info);
+                    }
                 }
 
                 @Override
@@ -53,15 +54,21 @@ public class InfoCharacterPresenter {
                 }
             });
         }
-        return info;
+    }
+
+    public InfoCharacterContractor.view getView(){
+        return view;
     }
 
     public void onViewDettached() {
-        iInfoCharacterActivity = null;
+        view = null;
     }
 
-
-    public void onViewAttached(IInfoCharacterActivity iInfoCharacterActivity) {
-        this.iInfoCharacterActivity = iInfoCharacterActivity;
+    public void onViewAttached(InfoCharacterContractor.view view) {
+        this.view=view;
     }
+    public boolean isAttached(){
+        return getView() != null;
+    }
+
 }

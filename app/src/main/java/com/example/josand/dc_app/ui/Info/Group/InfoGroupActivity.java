@@ -13,9 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import me.gujun.android.taggroup.TagGroup;
 
-public class InfoGroupActivity extends AppCompatActivity implements IInfoGroupActivity.View{
+public class InfoGroupActivity extends AppCompatActivity implements InfoGroupContractor.View{
 
-    private IInfoGroupActivity.Presenter presenter;
+    private InfoGroupContractor.Presenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private TextView base, firstAppearance;
@@ -52,7 +52,7 @@ public class InfoGroupActivity extends AppCompatActivity implements IInfoGroupAc
         members = findViewById(R.id.membersTag);
     }
 
-    public IInfoGroupActivity.Presenter getPresenter(){
+    public InfoGroupContractor.Presenter getPresenter(){
         return presenter;
     }
 

@@ -11,11 +11,10 @@ import com.example.josand.dc_app.model.PersonajeInfo;
 import com.example.josand.dc_app.R;
 import com.squareup.picasso.Picasso;
 
-public class InfoCharacterActivity extends AppCompatActivity {
+public class InfoCharacterActivity extends AppCompatActivity implements InfoCharacterContractor.view{
 
-    private InfoCharacterPresenter presenter;
+    private InfoCharacterContractor.presenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
-    private IInfoCharacterActivity iInfoCharacterActivity;
     private Toolbar toolbar;
     private TextView realName,quote,alias,base,powers,occupation, firstAppareance;
     private ImageView imgProf;
@@ -31,8 +30,8 @@ public class InfoCharacterActivity extends AppCompatActivity {
         if(presenter == null){
             presenter = new InfoCharacterPresenter(this,id);
         }
-        character = getPresenter().setUpPersonaje();
-        setUpData();
+        getPresenter().onViewAttached(InfoCharacterActivity.this);
+        getPresenter().getPersonaje();
     }
 
     public void initView(){
@@ -51,11 +50,25 @@ public class InfoCharacterActivity extends AppCompatActivity {
         firstAppareance = findViewById(R.id.firstAppearanceCharacterDetails);
     }
 
-    public InfoCharacterPresenter getPresenter(){
+    public InfoCharacterContractor.presenter getPresenter(){
         return presenter;
     }
 
-    public void setUpData(){
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getPresenter().onViewDettached();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().onViewAttached(InfoCharacterActivity.this);
+    }
+
+    @Override
+    public void setUpData(PersonajeInfo character) {
         try{
             collapsingToolbarLayout.setTitle(character.getName());
             Picasso.with(getApplicationContext()).load(character.getProfile()).into(imgProf);
@@ -69,17 +82,5 @@ public class InfoCharacterActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        getPresenter().onViewDettached();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getPresenter().onViewAttached(iInfoCharacterActivity);
     }
 }
